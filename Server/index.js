@@ -14,7 +14,7 @@ const uploads = multer({ dest: "uploads/" });
 const secretKey = process.env.JWT_SECRET;
 const app = express();
 const port = 8000;
-app.use(cors({ credentials: true, origin: "https://myblog-client.netlify.app" }));
+app.use(cors({ credentials: true, origin: "https://mern-blog-client-msab-2.onrender.com" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static("uploads"));
