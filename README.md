@@ -12,12 +12,14 @@ Before running this application, make sure you have the following installed on y
 ## Getting Started
 
 
-```bash
+
 git clone https://github.com/mirza7860/Mern-Blog-Server.git
 Server (Backend)
 In the server directory, install the required dependencies:
+``bash
 ### cd server
 ### npm install
+``bash
 Run the Application
 Server (Backend)
 From the server directory, start the Node.js server using nodemon:
