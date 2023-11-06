@@ -11,7 +11,7 @@ Before running this application, make sure you have the following installed on y
 
 ## Getting Started
 
-### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/mirza7860/Mern-Blog-Server.git
 Server (Backend)
