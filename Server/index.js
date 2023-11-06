@@ -14,10 +14,18 @@ const uploads = multer({ dest: "uploads/" });
 const secretKey = process.env.JWT_SECRET;
 const app = express();
 const port = 8000;
-app.use(cors({ credentials: true, origin: "https://myblog-client.onrender.com" }));
+app.use(
+  cors({
+    credentials: true,
+    origin: "https://myblog-client.onrender.com",
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static("uploads"));
+app.get("/", (req, res) => {
+  res.send("<h1>Welcome To My Blog Website.Hello World</h1>");
+});
 app.post("/register", async (req, res) => {
   const { Username, Password } = req.body;
   const salt = await bcrypt.genSalt(10);
@@ -42,7 +50,9 @@ app.post("/login", async (req, res) => {
   const token = jwt.sign({ Username, id: user._id }, secretKey);
   try {
     if (isLoggedin) {
-      res.status(200).cookie("token", token).json({ id: user._id, Username });
+      res.status(200).cookie("token", token, {sameSite: "none",
+          secure: true,
+          httpOnly: true,} ).json({ id: user._id, Username });
     } else {
       res.status(401).json({ message: "Incorrect password" });
     }
@@ -63,7 +73,9 @@ app.get("/profile", (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  res.cookie("token", "").json("Thanks for visiting.");
+  res.cookie("token", "" , {sameSite: "none",
+          secure: true,
+          httpOnly: true,}  ).json("Thanks for visiting.");
 });
 app.post("/post", uploads.single("file"), async (req, res) => {
   const { originalname, path } = req.file;
